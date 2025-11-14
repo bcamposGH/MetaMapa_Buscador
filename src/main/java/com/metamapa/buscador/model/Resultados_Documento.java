@@ -30,4 +30,6 @@ public class Resultados_Documento {
 
     private String origen;
 
+    private boolean ocultoPorSolicitud = false;
+
 }
