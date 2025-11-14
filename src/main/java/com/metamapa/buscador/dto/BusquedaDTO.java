@@ -22,9 +22,9 @@ public class BusquedaDTO {
     public static BusquedaDTO from(Resultados_Documento doc) {
         BusquedaDTO dto = new BusquedaDTO();
         dto.id = doc.getId();
-        dto.nombre = doc.getNombre();
+        dto.nombre = doc.getTitulo();
         dto.descripcion = doc.getDescripcion();
-        dto.tags = doc.getTags();
+        dto.tags = doc.getEtiquetas();
         return dto;
     }
 }

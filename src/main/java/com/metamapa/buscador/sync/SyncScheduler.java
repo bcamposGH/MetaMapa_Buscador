@@ -59,7 +59,7 @@ public class SyncScheduler {
 
             for (Resultados_Documento doc : lista) {
                 if (repo.existsById(doc.getId())) continue;
-                if (repo.existsByNombre(doc.getNombre())) continue;
+                if (repo.existsByTitulo(doc.getTitulo())) continue;
 
                 repo.save(doc);
                 nuevos++;

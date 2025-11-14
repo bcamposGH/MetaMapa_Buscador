@@ -26,7 +26,7 @@ public class MongoConfig implements ApplicationRunner {
         System.out.println("Asegurando índice de texto en 'documentos_buscables'...");
         
         TextIndexDefinition textIndex = new TextIndexDefinition.TextIndexDefinitionBuilder()
-                .onField("nombre", 3F)       
+                .onField("titulo", 3F)       
                 .onField("descripcion", 2F)    
                 .onField("infoPdi", 1F)       
                 .onField("infoExterna", 1F)   

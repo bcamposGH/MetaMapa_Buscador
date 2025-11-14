@@ -25,17 +25,16 @@ public class SearchSevice {
     private MongoTemplate mongoTemplate;
 
     public Page<BusquedaDTO> buscar(String keyword, String tag, Pageable pageable) {
-
+       
         TextCriteria criteria = TextCriteria.forDefaultLanguage().matching(keyword);
-
-        Query textQuery = TextQuery.queryText(criteria)
-                .sortByScore()
-                .with(pageable);
-
+        Query textQuery = TextQuery.queryText(criteria).sortByScore().with(pageable);
+        
         textQuery.addCriteria(Criteria.where("deleted").is(false));
-        if (StringUtils.hasText(tag)) {
-            textQuery.addCriteria(Criteria.where("tags").is(tag));
+        
+        if (tag != null) {
+            textQuery.addCriteria(Criteria.where("etiquetas").is(tag));
         }
+        
 
         List<Resultados_Documento> docs = mongoTemplate.find(textQuery, Resultados_Documento.class);
 
@@ -54,9 +53,9 @@ public class SearchSevice {
     private BusquedaDTO convertirADTO(Resultados_Documento doc) {
         BusquedaDTO dto = new BusquedaDTO();
         dto.setId(doc.getId());
-        dto.setNombre(doc.getNombre());
+        dto.setNombre(doc.getTitulo());
         dto.setDescripcion(doc.getDescripcion());
-        dto.setTags(doc.getTags());
+        dto.setTags(doc.getEtiquetas());
         return dto;
     }
 }

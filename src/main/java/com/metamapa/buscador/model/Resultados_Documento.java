@@ -16,18 +16,21 @@ public class Resultados_Documento {
     @Id
     private String id;
 
-    private String nombre;
+    private String nombre_coleccion;
 
-    private String descripcion;
+    private String titulo;    
     
-    private String infoPdi;
+    private String descripcion;    
 
-    private String infoExterna;
+    private List<String> etiquetas;
 
-    private List<String> tags;
-    
-    private boolean deleted = false;
+    private String categoria;
+
+    private String ubicacion;
+
+    private String fecha;
 
     private String origen;
 
+    private boolean deleted = false;
 }
