@@ -41,7 +41,7 @@ public class SearchSevice {
         Query countQuery = TextQuery.queryText(criteria);
         countQuery.addCriteria(Criteria.where("deleted").is(false));
         if (StringUtils.hasText(tag)) {
-            countQuery.addCriteria(Criteria.where("tags").is(tag));
+            countQuery.addCriteria(Criteria.where("etiquetas").is(tag));
         }
         long total = mongoTemplate.count(countQuery, Resultados_Documento.class);
 

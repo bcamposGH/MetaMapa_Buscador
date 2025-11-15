@@ -6,5 +6,4 @@ import com.metamapa.buscador.model.Resultados_Documento;
 public interface ResultadosDocumentoRepository extends MongoRepository<Resultados_Documento, String> {
 
     boolean existsByTitulo(String titulo);
-
 }

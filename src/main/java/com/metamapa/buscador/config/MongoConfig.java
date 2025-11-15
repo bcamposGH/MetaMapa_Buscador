@@ -34,10 +34,10 @@ public class MongoConfig implements ApplicationRunner {
                 .build();
 
         indexOps.ensureIndex(textIndex); 
-        System.out.println("Asegurando índice único en 'nombre'...");
+        System.out.println("Asegurando índice único en 'titulo'...");
         
         Index uniqueNameIndex = new Index()
-                .on("nombre", Sort.Direction.ASC) 
+                .on("titulo", Sort.Direction.ASC) 
                 .unique(); 
                                        
         indexOps.ensureIndex(uniqueNameIndex);

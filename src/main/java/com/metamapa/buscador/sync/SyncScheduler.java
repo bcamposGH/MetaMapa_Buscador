@@ -37,8 +37,8 @@ public class SyncScheduler {
         }).start();
     }
 
-    /** ✔ Se ejecuta cada 5 minutos */
-    @Scheduled(fixedRate = 5 * 60 * 1000)
+    /** ✔ Se ejecuta cada minuto)*/
+    @Scheduled(fixedRate = 60 * 1000)
     public void syncPeriodica() {
         System.out.println(">>> Ejecutando sincronización periódica...");
         sincronizar();
@@ -48,27 +48,41 @@ public class SyncScheduler {
         try {
             String url = "https://two025-tp-entrega-2-zoedominguez-bsuh.onrender.com/hechos";
             Resultados_Documento[] respuesta = restTemplate.getForObject(url, Resultados_Documento[].class);
-
+    
             if (respuesta == null) {
                 System.err.println("El agregador devolvió null.");
                 return;
             }
-
+    
             List<Resultados_Documento> lista = Arrays.asList(respuesta);
             int nuevos = 0;
-
+    
             for (Resultados_Documento doc : lista) {
-                if (repo.existsById(doc.getId())) continue;
-                if (repo.existsByTitulo(doc.getTitulo())) continue;
-
+    
+                System.out.println("----- DOCUMENTO RECIBIDO -----");
+                System.out.println("ID: " + doc.getId());
+                System.out.println("TITULO: " + doc.getTitulo());
+    
+                // boolean existsId = repo.existsById(doc.getId());
+                // boolean existsTitulo = repo.existsByTitulo(doc.getTitulo());
+    
+                // System.out.println("¿Existe ID? " + existsId);
+                // System.out.println("¿Existe Titulo? " + existsTitulo);
+    
+                // if (existsId || existsTitulo) {
+                //     System.out.println(">> Saltando, ya existe.");
+                //     continue;
+                // }
+    
                 repo.save(doc);
                 nuevos++;
             }
-
-            System.out.println("✔ Sincronización completada. Nuevos agregados: " + nuevos);
-
+    
+            System.out.println("✔ Sincronización completada. Hechos agregados: " + nuevos);
+    
         } catch (Exception e) {
             System.err.println("Error sincronizando desde agregador: " + e.getMessage());
         }
     }
+    
 }
